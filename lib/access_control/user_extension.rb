@@ -8,7 +8,7 @@ module AccessControl
           has_one :permission, :as => :authorizable, :dependent => :destroy						
           has_and_belongs_to_many :roles, :join_table => :user_roles
 
-          alias :can? :has_permission?
+          alias_method :can? :has_permission?
 
           #attr_protected :permission_attributes,:role_attributes,:role_ids
           accepts_nested_attributes_for :permission

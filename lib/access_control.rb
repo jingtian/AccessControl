@@ -18,3 +18,4 @@ end
 
 
 ActiveRecord::Base.send :include, AccessControl::MacroMethods
+ApplicationController.send :include, AccessControl::ControllerHelper

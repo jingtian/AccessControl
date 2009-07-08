@@ -1,4 +1,6 @@
-# desc "Explaining what the task does"
-# task :access_control do
-#   # Task goes here
-# end
+namespace :access_control do
+  task :permissions => :environment do
+    desc "Lists all available permissions"
+    Permission.names.each {|name| puts name}
+  end
+end
