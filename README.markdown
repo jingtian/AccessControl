@@ -100,7 +100,7 @@ User Methods:
 	User#plays(role)
 	User#does_not_play?(role)
 	User#does_not_play(role)
-	User.roles (and all other has_and_belongs_to_many methods)
-
+	User#roles (and all other has_and_belongs_to_many methods)
+	User#has_any_permissions? (useful to see if you should allow someone into an admin area)
 
 Copyright (c) 2009 Adam Hawkins, released under the MIT license

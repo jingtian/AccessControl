@@ -41,7 +41,7 @@ class AccessControlGenerator < Rails::Generator::NamedBase
     assigns = {}
     assigns[:migration_action] = "add"
     assigns[:class_name] = "create_multiple_permissions_#{@permission_names.join('_').underscore}".camelize if @permission_names
-    assigns[:class_name] = "create_multiple_permissions" if @permission_name
+    assigns[:class_name] = "create_permission_#{@permission_name}" if @permission_name
     assigns[:table_name] = "permissions"
     assigns[:attributes] = @permission_names.map {|name| Rails::Generator::GeneratedAttribute.new(name, "boolean")}
     assigns
