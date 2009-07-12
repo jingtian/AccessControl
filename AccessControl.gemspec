@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Adam Hawkins"]
-  s.date = %q{2009-07-11}
+  s.date = %q{2009-07-12}
   s.description = %q{Simple role based authorization for rails}
   s.email = %q{Adman1965@gmail.com}
   s.extra_rdoc_files = [
@@ -48,13 +48,13 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.4}
   s.summary = %q{Simple role based authorization for rails}
   s.test_files = [
-    "spec/spec_helper.rb",
-     "spec/support/access_control_user.rb",
-     "spec/support/authorizable.rb",
-     "spec/support/schema.rb",
+    "spec/access_controlled_user_spec.rb",
      "spec/models/permission_spec.rb",
      "spec/models/role_spec.rb",
-     "spec/access_controlled_user_spec.rb"
+     "spec/spec_helper.rb",
+     "spec/support/access_control_user.rb",
+     "spec/support/authorizable.rb",
+     "spec/support/schema.rb"
   ]
 
   if s.respond_to? :specification_version then
