@@ -3,7 +3,7 @@ module AccessControl
 
     def self.included(klass)
       klass.class_eval do
-        alias :authorize :grant
+        alias_method :authorize, :grant
       end
     end
 

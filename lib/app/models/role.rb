@@ -1,7 +1,9 @@
+#require '../access_control'
+
 class Role < ActiveRecord::Base
-	#include AccessControl::RoleExtension
+	include AccessControl::RoleExtension
 	
-	validates_presence_of :name, :description
+	validates_presence_of :name
 	validates_uniqueness_of :name
 	
 	validates_length_of :description, :maximum => 100, :allow_nil => true

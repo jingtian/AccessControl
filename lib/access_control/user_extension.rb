@@ -8,13 +8,11 @@ module AccessControl
           has_one :permission, :as => :authorizable, :dependent => :destroy						
           has_and_belongs_to_many :roles, :join_table => :user_roles
 
-          alias_method :can? :has_permission?
+          alias_method :can?, :has_permission?
 
-          #attr_protected :permission_attributes,:role_attributes,:role_ids
           accepts_nested_attributes_for :permission
         end
-    end
-    
+    end    
     
     def plays role
       role = role.to_s if role.is_a? Symbol
@@ -26,8 +24,9 @@ module AccessControl
 
     def plays? role
       role = role.to_s if role.is_a? Symbol
-      raise "#{role} does not exist" if Role.find_by_name(role.downcase).nil?
-      roles.find_by_name(role.downcase) != nil
+      actual_role = Role.find_by_name(role.downcase)
+      raise "#{role} does not exist" if actual_role.nil?
+      roles.include? actual_role
     end
 
     def does_not_play? role
@@ -43,7 +42,7 @@ module AccessControl
     end
 
     def permissions        
-      set = self.permission.set_permissions
+      set = self.permission.set_permissions unless self.permission.nil?
       set = [] if set.nil?
       set = [set] if set.is_a? String        
 
@@ -55,13 +54,11 @@ module AccessControl
       end
 
       total = set + role_permissions
-      return nil if total.eql? []
-      return total.first if total.size.eql? 1
       total.uniq
     end
 
     def has_any_permissions?
-      !self.permissions.nil?
+      !self.permissions.empty?
     end      
 
     def roles_attributes=(attributes)        

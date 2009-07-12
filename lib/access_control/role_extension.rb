@@ -1,4 +1,4 @@
-module AcessControl
+module AccessControl
   module RoleExtension
     
     def self.included(klass)
@@ -6,7 +6,7 @@ module AcessControl
         include AccessControl::CommonMethods
         include AccessControl::Language
 
-        has_and_belongs_to_many :users, :join_table => :user_roles
+        has_and_belongs_to_many :users, :join_table => :user_roles#, :foreign_key => :access_control_user_id
         has_one :permission, :as => :authorizable, :dependent => :destroy
 
         alias :has_permission? :has_local_permission?
