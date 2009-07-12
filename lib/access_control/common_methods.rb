@@ -36,11 +36,6 @@ module AccessControl
       return true if self.permission.god
       self.permission.send(perm)  
     end
-
-    private
-    def create_new_permission
-      self.permission = Permission.create
-    end
-
+    
   end
 end

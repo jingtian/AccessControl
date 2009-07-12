@@ -32,6 +32,13 @@ module AccessControl
     def does_not_play? role
       !plays? role
     end
+    
+    def does_not_play role
+      role = role.to_s if role.is_a? Symbol
+      actual_role = Role.find_by_name(role.downcase)
+      raise "#{role} does not exist" if actual_role.nil?
+      roles.delete actual_role
+    end
 
     def has_permission? perm
       return true if has_local_permission? perm

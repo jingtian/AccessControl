@@ -5,6 +5,7 @@ class GenerateAccessControlModels < ActiveRecord::Migration
        t.string   "authorizable_type"
        t.datetime "created_at"
        t.datetime "updated_at"
+       t.boolean "god", :default => false
     end
     
     create_table "roles" do |t|

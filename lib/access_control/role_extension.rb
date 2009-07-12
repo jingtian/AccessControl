@@ -6,7 +6,7 @@ module AccessControl
         include AccessControl::CommonMethods
         include AccessControl::Language
 
-        has_and_belongs_to_many :users, :join_table => :user_roles#, :foreign_key => :access_control_user_id
+        has_and_belongs_to_many :users, :join_table => :user_roles
         has_one :permission, :as => :authorizable, :dependent => :destroy
 
         alias :has_permission? :has_local_permission?
@@ -17,10 +17,7 @@ module AccessControl
     end
 
     def permissions
-      set = self.permission.set_permissions
-      return nil if set.nil?
-      return set.first if set.size.eql? 0
-      set
+      self.permission.set_permissions
     end
 
   end

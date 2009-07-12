@@ -1,6 +1,5 @@
 AccessControl
 =============
-**Warning: this is a beta plugin!**
 
 AccessControl is a user authorization plugin. It gives you a role based permission system without having to do any work. There are users and roles, each have permission.
 A user can play any role and inherit permissions through that role. A user may also have individual permissions. For example, you can create a role to update
@@ -14,18 +13,19 @@ Features
 * God permission
 * Easy to use
 
-
 Up and Running
 ================
 
 Install
 -------
 
-First, prepare your application. AccessControl does not create user logins, it soley is a permission system. I'm assuming you have model named user. AccessControl
+First, prepare your application. AccessControl does not create user logins, it soley is a permission system. Your user model must be named User. AccessControl
 also uses two other models: Permission & Role. Once your users can login and log out, you are ready to use AccessControl.
 
 1. Install
-		./script/plugin install git://github.com/Adman65/AccessControl.git
+		(plugin) ./script/plugin install git://github.com/Adman65/AccessControl.git
+		(gem) sudo gem install Adman65-AccessControl
+		(gem) config.gem 'Adman65-AccessControl', :lib => 'access_control'		
 
 2. Prepare the database
 		./script/generate access_control models
@@ -64,7 +64,7 @@ Voilla, Adam can now post_news. But that's no good by itself. So now check agani
 		end
 		
 Your controllers are protected from people who can't post news. Now lets expand our permissions by adding a role:
-		editors = Role.create :name => "Editors", :description => "Manage content around the site."
+		editors = Role.create :name => "Editors", :description => "Manage content around the site." # Description is optional
 		# assuming we have these permissions in the system
 		editors.grant :manage_news
 		editors.grant :manage_categories
@@ -83,29 +83,24 @@ Man, Adam sure got a lot of responsibilities, hopefully you trust him :)
 Using the language
 ==============
 
-Its nice to be able to express concepts in code that when you read the code, you understand what is going on. AccessControl gives you expressive method names
-express authorization inside your code. The methods below can be user on a User or Role.
-		@user.can_manage_news?
-		@user.can? :manage_news
-		@user.can? "manage_news"
-		@user.has_permission :manage_news
-		@user.cannot? :manage_news
-		@user.grant :permission
-		@user.authorize :permission
-		@user.deauthorize :permission
-		@user.permissions (returns an array of all the permissions a user/role has)
-		
-These methods only work on users
-		@user.plays :role_name
-		@user.plays? :role_name
-		@user.is_a_editor?
-
-
-Utilties
-===========
-Sometimes you want to see all the permissions in your application:
-			rake access_control:permissions
-
+Here are the methods available on User & Role objects:
+	Authorizable#authorize(permission)
+	Authorizable#grant(permission)
+	Authorizable#deauthorize(permission)
+	Authorizable#cannot?(permission)
+	Authorizable#god?
+	Authorizable#can_permission_name?
+	Authorizable#can_not_permission_name?
+	Authorizable#permissions
+	Authorizable#has_permission?(permission)
+	Authorizable#can?(permission)
+	
+User Methods:
+	User#plays?(role)
+	User#plays(role)
+	User#does_not_play?(role)
+	User#does_not_play(role)
+	User.roles (and all other has_and_belongs_to_many methods)
 
 
 Copyright (c) 2009 Adam Hawkins, released under the MIT license

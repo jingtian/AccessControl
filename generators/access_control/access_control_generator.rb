@@ -29,7 +29,7 @@ class AccessControlGenerator < Rails::Generator::NamedBase
 
         m.migration_template File.join("migrate","create_access_control_models.rb"), File.join("db","migrate"), :migration_file_name => "GenerateAccessControlModels".underscore
       when :permission
-        file_name = "create_multiple_permissions" if args.size > 2
+        file_name = "create_multiple_permissions_#{@permission_names.join('_').underscore}" if args.size > 2
         file_name = "create_permission_#{@permission_name}" if args.size.eql? 2        
         m.migration_template "migration:migration.rb", File.join("db","migrate"), :assigns => migration_options, :migration_file_name => file_name        
       end
@@ -40,7 +40,8 @@ class AccessControlGenerator < Rails::Generator::NamedBase
   def migration_options
     assigns = {}
     assigns[:migration_action] = "add"
-    assigns[:class_name] = "create_permission_#{@permission_name}"
+    assigns[:class_name] = "create_multiple_permissions_#{@permission_names.join('_').underscore}".camelize if @permission_names
+    assigns[:class_name] = "create_multiple_permissions" if @permission_name
     assigns[:table_name] = "permissions"
     assigns[:attributes] = @permission_names.map {|name| Rails::Generator::GeneratedAttribute.new(name, "boolean")}
     assigns
