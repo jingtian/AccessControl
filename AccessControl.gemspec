@@ -13,7 +13,8 @@ Gem::Specification.new do |s|
     "README.markdown"
   ]
   s.files = [
-    "AccessControl.gemspec",
+    ".gitignore",
+     "AccessControl.gemspec",
      "MIT-LICENSE",
      "README.markdown",
      "Rakefile",

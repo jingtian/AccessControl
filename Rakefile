@@ -40,7 +40,7 @@ begin
     s.homepage = "http://github.com/Adman65/AccessControl"
     s.description = "Simple role based authorization for rails"
     s.authors = ["Adam Hawkins"]
-    s.files = PKG_FILES.to_a 
+    #s.files = PKG_FILES.to_a 
   end
 rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
