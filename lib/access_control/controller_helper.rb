@@ -6,5 +6,9 @@ module AccessControl
         redirect_back_or_default
       end
     end
+
+    def role_required(role)
+
+    end
   end
 end
